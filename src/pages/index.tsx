@@ -1,6 +1,6 @@
 import { HomeContainer, Product } from '@/styles/pages/home'
 import { GetStaticProps } from 'next'
-import { styled } from '../styles'
+
 import Image from 'next/image'
 
 import { useKeenSlider } from 'keen-slider/react'
@@ -14,7 +14,7 @@ interface HomeProps {
     id: string;
     name: string;
     imageUrl: string;
-    price: number;
+    price: string;
   }[]
 }
 
