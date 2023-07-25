@@ -11,10 +11,15 @@ interface ProductProps {
         imageUrl: string;
         price: string;
         description: string;
+        defaultPriceId: string;
     }
 }
 
 export default function Product({ product }: ProductProps) {
+
+    function handleBuyProduct() {
+        console.log(product.defaultPriceId)
+    }
 
     return (
         <ProductContainer>
@@ -28,7 +33,7 @@ export default function Product({ product }: ProductProps) {
 
                 <p>{product.description}</p>
 
-                <button>
+                <button onClick={handleBuyProduct}>
                     Comprar agora
                 </button>
             </ProductDetails>
@@ -39,7 +44,7 @@ export default function Product({ product }: ProductProps) {
 export const getStaticPaths: GetStaticPaths = async () => {
     return {
         paths: [{
-            params: { id: 'test' }
+            params: { id: 'prod_OIIthi8HvQ96qF' }
         }],
         fallback: true
     }
@@ -56,7 +61,7 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({ para
     const price = product.default_price as Stripe.Price
 
     const oneHour = 60 * 60 * 1
-
+    console.log(product.id)
     return {
         props: {
             product: {
@@ -67,7 +72,8 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({ para
                     style: 'currency',
                     currency: 'BRL'
                 }).format(Number(price.unit_amount) / 100),
-                description: product.description
+                description: product.description,
+                defaultPriceId: price.id
             }
         },
         revalidate: oneHour
