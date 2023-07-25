@@ -3,6 +3,7 @@ declare namespace NodeJS {
         // Add your environment variables here
         STRIPE_PUBLIC_KEY: string;
         STRIPE_SECRET_KEY: string;
+        NEXT_URL: string;
         // ...
     }
 }
